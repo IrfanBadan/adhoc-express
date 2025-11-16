@@ -3,10 +3,9 @@ import bcrypt from "bcryptjs";
 import User from "../models/User.js";
 
 const router = express.Router();
-app.use(cors({
-  origin: "*",
-  methods: ["GET", "POST"],
-}));
+
+
+
 
 
 // 📝 Register
