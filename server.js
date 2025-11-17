@@ -9,20 +9,24 @@ dotenv.config();
 
 const app = express();
 
-// Middlewares
-app.use(cors());
+// CORS Fix
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST"],
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Database
+// MongoDB
 mongoose
-  .connect(process.env.MONGO_URL)   //  << FIXED HERE
+  .connect(process.env.MONGO_URL)
   .then(() => console.log("MongoDB connected"))
   .catch((error) => console.log("Error:", error));
 
 // Routes
 app.use("/api/users", userRoutes);
 
-// Port binding for Render
+// Render Port
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
